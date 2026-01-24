@@ -42,11 +42,3 @@ docker-compose logs
 ```bash
 docker-compose down
 ```
-
-## Демо
-
-### Запущені контейнери
-![Запущені контейнери](demo/demo-1.png)
-
-### Стартова сторінка Django
-![Стартова сторінка Django](demo/demo-2.png)
