@@ -1,47 +1,33 @@
-# Django + PostgreSQL + Nginx (Docker)
+# DevOps CI/CD
 
-Docker-проєкт з Django, базою даних PostgreSQL та веб-сервером Nginx.
+## Lesson 5: Terraform (AWS)
 
-## Вимоги
+Terraform-проєкт для створення AWS інфраструктури:
+- **S3 + DynamoDB** — зберігання Terraform state
+- **VPC** — мережева інфраструктура (публічні/приватні підмережі, NAT Gateway)
+- **ECR** — репозиторій для Docker-образів
 
-- Docker
-- Docker Compose
-
-## Швидкий старт
-
-### 1. Створіть .env файл
+### Швидкий старт
 ```bash
-cp .env.example .env
+cd lesson-5
+terraform init
+terraform plan
+terraform apply
 ```
 
-### 2. Запустіть контейнери
-```bash
-docker-compose up -d
-```
+---
 
-### 3. Перевірте статус контейнерів
-```bash
-docker ps
-```
+## Демо (Lesson 5)
 
-### 4. Відкрийте у браузері
-- http://localhost (через Nginx)
-- http://localhost:8000 (Django напряму)
-
-### 5. Перегляд логів
-```bash
-docker-compose logs
-```
-
-### 6. Зупинка контейнерів
-```bash
-docker-compose down
-```
-
-## Демо
-
-### Запущені контейнери
-![Запущені контейнери](demo/demo-1.png)
-
-### Стартова сторінка Django
-![Стартова сторінка Django](demo/demo-2.png)
+![Demo 1](demo/demo-01.png)
+![Demo 2](demo/demo-02.png)
+![Demo 3](demo/demo-03.png)
+![Demo 4](demo/demo-04.png)
+![Demo 5](demo/demo-05.png)
+![Demo 6](demo/demo-06.png)
+![Demo 7](demo/demo-07.png)
+![Demo 8](demo/demo-08.png)
+![Demo 9](demo/demo-09.png)
+![Demo 10](demo/demo-10.png)
+![Demo 11](demo/demo-11.png)
+![Demo 12](demo/demo-12.png)
