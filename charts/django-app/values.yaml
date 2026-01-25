@@ -1,7 +1,7 @@
 # Docker image configuration
 image:
   repository: 155798754903.dkr.ecr.eu-west-1.amazonaws.com/django-app
-  tag: latest
+  tag: v1.0.2
   pullPolicy: Always
 
 # Service configuration
