@@ -1,0 +1,5 @@
+# Argo CD Helm values
+server:
+  service:
+    type: LoadBalancer
+    port: 443

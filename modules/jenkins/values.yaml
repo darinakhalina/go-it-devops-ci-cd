@@ -1,0 +1,10 @@
+# TODO: Jenkins Helm values
+# This file will contain Jenkins configuration including:
+# - admin credentials
+# - service type (LoadBalancer)
+# - resources
+# - persistent volume
+# - plugins
+# - JCasC (Configuration as Code)
+#   - credentials (GitHub PAT)
+#   - seed-job
