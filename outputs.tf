@@ -46,3 +46,35 @@ output "eks_node_role_arn" {
   description = "EKS node IAM role ARN"
   value       = module.eks.node_role_arn
 }
+
+output "oidc_provider_arn" {
+  description = "OIDC provider ARN"
+  value       = module.eks.oidc_provider_arn
+}
+
+#-------------Jenkins-----------------
+output "jenkins_release" {
+  description = "Jenkins Helm release name"
+  value       = module.jenkins.jenkins_release_name
+}
+
+output "jenkins_namespace" {
+  description = "Jenkins namespace"
+  value       = module.jenkins.jenkins_namespace
+}
+
+#-------------ArgoCD-----------------
+output "argocd_namespace" {
+  description = "ArgoCD namespace"
+  value       = module.argo_cd.namespace
+}
+
+output "argocd_server_service" {
+  description = "ArgoCD server service"
+  value       = module.argo_cd.argo_cd_server_service
+}
+
+output "argocd_admin_password" {
+  description = "Command to get ArgoCD admin password"
+  value       = module.argo_cd.admin_password
+}

@@ -1,4 +1,32 @@
-# TODO: Argo CD Helm releases
-# This file will contain:
-# - helm_release (argo_cd) - main Argo CD installation
-# - helm_release (argo_apps) - Argo CD applications
+# Argo CD Helm Release
+resource "helm_release" "argo_cd" {
+  name       = var.name
+  namespace  = var.namespace
+  repository = "https://argoproj.github.io/argo-helm"
+  chart      = "argo-cd"
+  version    = var.chart_version
+
+  values = [
+    file("${path.module}/values.yaml")
+  ]
+
+  create_namespace = true
+}
+
+# Argo CD Applications (deployed after ArgoCD is ready)
+resource "helm_release" "argo_apps" {
+  name             = "${var.name}-apps"
+  chart            = "${path.module}/charts"
+  namespace        = var.namespace
+  create_namespace = false
+
+  values = [
+    templatefile("${path.module}/charts/values.yaml", {
+      github_username = var.github_username
+      github_token    = var.github_token
+      github_repo_url = var.github_repo_url
+    })
+  ]
+
+  depends_on = [helm_release.argo_cd]
+}

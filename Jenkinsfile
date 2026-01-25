@@ -34,8 +34,7 @@ spec:
   }
 
   environment {
-    // TODO: Update with your ECR registry URL
-    ECR_REGISTRY = "YOUR_ACCOUNT_ID.dkr.ecr.eu-west-1.amazonaws.com"
+    ECR_REGISTRY = "155798754903.dkr.ecr.eu-west-1.amazonaws.com"
     IMAGE_NAME   = "django-app"
     IMAGE_TAG    = "v1.0.${BUILD_NUMBER}"
 
@@ -63,8 +62,7 @@ spec:
         container('git') {
           withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PAT')]) {
             sh '''
-              # TODO: Update with your repo URL
-              git clone https://$GIT_USERNAME:$GIT_PAT@github.com/$GIT_USERNAME/go-it-devops-ci-cd.git repo
+              git clone https://$GIT_USERNAME:$GIT_PAT@github.com/darinakhalina/go-it-devops-ci-cd.git repo
               cd repo
               git checkout lesson-8-9
 
