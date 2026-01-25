@@ -57,3 +57,59 @@ kubectl get svc -n default django-app-django
 ```bash
 terraform destroy
 ```
+
+## Демонстрація
+
+### GitHub Token
+![demo_01](demo/demo_01.png)
+
+### Terraform Variables
+![demo_02](demo/demo_02.png)
+
+### Jenkins Pods
+![demo_03](demo/demo_03.png)
+
+### ArgoCD Pods
+![demo_04](demo/demo_04.png)
+
+### Jenkins Service
+![demo_05](demo/demo_05.png)
+
+### Jenkins Login
+![demo_06](demo/demo_06.png)
+
+### Jenkins Dashboard
+![demo_07](demo/demo_07.png)
+
+### Jenkins Build Success
+![demo_08](demo/demo_08.png)
+
+### Services Overview
+![demo_09](demo/demo_09.png)
+
+### ArgoCD Login
+![demo_10](demo/demo_10.png)
+
+### ArgoCD Applications
+![demo_11](demo/demo_11.png)
+
+### ArgoCD App Details
+![demo_12](demo/demo_12.png)
+
+### Django Service
+![demo_13](demo/demo_13.png)
+
+### Django App Running
+![demo_14](demo/demo_14.png)
+
+### ECR Repository
+![demo_15](demo/demo_15.png)
+
+### EKS Cluster
+![demo_16](demo/demo_16.png)
+
+### EC2 Nodes
+![demo_17](demo/demo_17.png)
+
+### GitHub Commits
+![demo_18](demo/demo_18.png)
