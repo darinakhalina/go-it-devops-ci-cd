@@ -32,6 +32,7 @@ controller:
     - github:latest
     - docker-workflow:latest
     - job-dsl:latest
+    - blueocean:latest
 
   serviceAccount:
     name: jenkins-sa
