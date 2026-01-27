@@ -1,6 +1,8 @@
 # Docker image configuration
+# NOTE: AWS Account ID is parameterized - Jenkinsfile dynamically replaces
+# AWS_ACCOUNT_ID using `aws sts get-caller-identity` on each build.
 image:
-  repository: 155798754903.dkr.ecr.eu-west-1.amazonaws.com/django-app
+  repository: AWS_ACCOUNT_ID.dkr.ecr.eu-west-1.amazonaws.com/django-app
   tag: v1.0.2
   pullPolicy: Always
 
@@ -35,3 +37,16 @@ config:
   POSTGRES_PASSWORD: "your_password_here"
   DEBUG: "False"
   ALLOWED_HOSTS: "*"
+
+# Health probes configuration
+probes:
+  liveness:
+    enabled: true
+    path: /admin/login/
+    initialDelaySeconds: 30
+    periodSeconds: 10
+  readiness:
+    enabled: true
+    path: /admin/login/
+    initialDelaySeconds: 5
+    periodSeconds: 5

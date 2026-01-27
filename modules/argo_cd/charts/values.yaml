@@ -1,5 +1,8 @@
 # TODO: Argo CD Applications configuration
 # This will be templated with github credentials
+#
+# PRODUCTION NOTE: In production, use AWS Secrets Manager with External Secrets Operator
+# instead of storing credentials in Terraform variables or values.yaml
 
 applications:
   - name: django-app

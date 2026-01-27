@@ -1,8 +1,12 @@
+# PRODUCTION NOTE: In production, use AWS Secrets Manager with External Secrets Operator
+# instead of storing credentials in Terraform variables or values.yaml
 controller:
   admin:
     username: admin
     password: admin123
 
+  # PRODUCTION NOTE: Use Ingress with TLS (AWS ALB + ACM or nginx-ingress + cert-manager)
+  # instead of LoadBalancer for secure production deployments
   serviceType: LoadBalancer
   servicePort: 80
 
