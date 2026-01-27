@@ -1,0 +1,73 @@
+# PRODUCTION NOTE: In production, use AWS Secrets Manager with External Secrets Operator
+# instead of storing credentials in Terraform variables or values.yaml
+controller:
+  admin:
+    username: admin
+    password: admin123
+
+  # PRODUCTION NOTE: Use Ingress with TLS (AWS ALB + ACM or nginx-ingress + cert-manager)
+  # instead of LoadBalancer for secure production deployments
+  serviceType: LoadBalancer
+  servicePort: 80
+
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "1Gi"
+    requests:
+      cpu: "250m"
+      memory: "512Mi"
+
+  persistence:
+    enabled: true
+    storageClass: "ebs-sc"
+    size: 10Gi
+
+  installPlugins:
+    - kubernetes:latest
+    - workflow-aggregator:latest
+    - git:latest
+    - configuration-as-code:latest
+    - credentials-binding:latest
+    - github:latest
+    - docker-workflow:latest
+    - job-dsl:latest
+    - blueocean:latest
+
+  serviceAccount:
+    name: jenkins-sa
+    create: false
+
+  JCasC:
+    configScripts:
+      credentials: |
+        credentials:
+          system:
+            domainCredentials:
+              - credentials:
+                  - usernamePassword:
+                      scope: GLOBAL
+                      id: github-token
+                      username: "${github_username}"
+                      password: "${github_token}"
+                      description: GitHub PAT
+      seed-job: |
+        jobs:
+          - script: >
+              pipelineJob('django-ci-cd') {
+                description('CI/CD pipeline for Django project')
+                definition {
+                  cpsScm {
+                    scriptPath('Jenkinsfile')
+                    scm {
+                      git {
+                        remote {
+                          url('${github_repo_url}')
+                          credentials('github-token')
+                        }
+                        branches('*/lesson-8-9')
+                      }
+                    }
+                  }
+                }
+              }

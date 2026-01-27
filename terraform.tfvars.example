@@ -1,0 +1,12 @@
+# GitHub credentials
+github_username = "your-github-username"
+github_token    = "ghp_xxxxxxxxxxxxxxxxxxxx"
+github_repo_url = "https://github.com/your-username/your-repo.git"
+
+# AWS settings
+region        = "eu-west-1"
+cluster_name  = "lesson-8-9-eks"
+instance_type = "t3.small"
+
+# ECR
+repository_name = "django-app"

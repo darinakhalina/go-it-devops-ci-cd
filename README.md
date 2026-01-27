@@ -1,88 +1,121 @@
-# Lesson 7: Kubernetes (EKS) + Helm
+# CI/CD Pipeline: Jenkins + ArgoCD + Terraform
 
-Django-застосунок в AWS EKS з Terraform та Helm.
-
-## Структура
+## Архітектура
 
 ```
-lesson-7/
-├── main.tf, backend.tf, outputs.tf
+Git Push → Jenkins → Збірка Docker → Push в ECR → Оновлення Helm Chart → ArgoCD → Деплой в EKS
+```
+
+## Структура проєкту
+
+```
+├── main.tf                 # Головний конфіг Terraform
 ├── modules/
-│   ├── s3-backend/    # Terraform state
-│   ├── vpc/           # Мережа
-│   ├── ecr/           # Docker registry
-│   └── eks/           # Kubernetes кластер
-└── charts/django-app/ # Helm chart
-    └── templates/     # deployment, service, configmap, hpa
+│   ├── vpc/                # Модуль VPC
+│   ├── eks/                # EKS кластер
+│   ├── ecr/                # ECR репозиторій
+│   ├── jenkins/            # Jenkins через Helm
+│   └── argo_cd/            # ArgoCD через Helm
+├── charts/django-app/      # Helm chart для застосунку
+└── docker/                 # Django застосунок + Dockerfile
 ```
 
-## Команди
+## Розгортання інфраструктури
 
-### 1. Terraform
 ```bash
-cd lesson-7
 terraform init
+terraform plan
 terraform apply
+aws eks update-kubeconfig --region eu-west-1 --name lesson-8-9-eks
 ```
 
-### 2. kubectl
+## Перевірка Jenkins
+
 ```bash
-aws eks update-kubeconfig --region eu-west-1 --name lesson-7-eks
-kubectl get nodes
+kubectl get svc -n jenkins jenkins
 ```
 
-### 3. Docker → ECR
-```bash
-# Login
-aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin <ECR_URL>
+Відкрити `http://<EXTERNAL-IP>` → Увійти → Натиснути `django-ci-cd` → Build Now
 
-# Build та Push
-cd lesson-4/django
-docker build --platform linux/amd64 -t django-app .
-docker tag django-app:latest <ECR_URL>:latest
-docker push <ECR_URL>:latest
+## Перевірка ArgoCD
+
+```bash
+kubectl get svc -n argocd argo-cd-argocd-server
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
-### 4. Helm
+Відкрити `https://<EXTERNAL-IP>` → Перевірити `django-app`: Synced, Healthy
+
+## Доступ до застосунку
+
 ```bash
-cd lesson-7/charts
-helm install django-app ./django-app
+kubectl get svc -n default django-app-django
 ```
 
-### 5. Перевірка
+## Видалення ресурсів
+
 ```bash
-kubectl get pods
-kubectl get svc
-kubectl get hpa
-kubectl get configmap
-```
-
-## Helm Chart
-
-- **Deployment** — Django з ECR, envFrom ConfigMap
-- **Service** — LoadBalancer (порт 80)
-- **HPA** — 2-6 подів, CPU > 70%
-- **ConfigMap** — змінні середовища
-
-## Очистка
-```bash
-helm uninstall django-app
 terraform destroy
 ```
 
-## Demo
+## Демонстрація
 
-![](demo/demo_01.png)
-![](demo/demo_02.png)
-![](demo/demo_03.png)
-![](demo/demo_04.png)
-![](demo/demo_05.png)
-![](demo/demo_06.png)
-![](demo/demo_07.png)
-![](demo/demo_08.png)
-![](demo/demo_09.png)
-![](demo/demo_10.png)
-![](demo/demo_11.png)
-![](demo/demo_12.png)
-![](demo/demo_13.png)
-![](demo/demo_14.png)
+### GitHub Token
+![demo_01](demo/demo_01.png)
+
+### Terraform Variables
+![demo_02](demo/demo_02.png)
+
+### Jenkins Pods
+![demo_03](demo/demo_03.png)
+
+### ArgoCD Pods
+![demo_04](demo/demo_04.png)
+
+### Jenkins Service
+![demo_05](demo/demo_05.png)
+
+### Jenkins Login
+![demo_06](demo/demo_06.png)
+
+### Jenkins Dashboard
+![demo_07](demo/demo_07.png)
+
+### Jenkins Build Success
+![demo_08](demo/demo_08.png)
+
+### Services Overview
+![demo_09](demo/demo_09.png)
+
+### ArgoCD Login
+![demo_10](demo/demo_10.png)
+
+### ArgoCD Applications
+![demo_11](demo/demo_11.png)
+
+### ArgoCD App Details
+![demo_12](demo/demo_12.png)
+
+### Django Service
+![demo_13](demo/demo_13.png)
+
+### Django App Running
+![demo_14](demo/demo_14.png)
+
+### ECR Repository
+![demo_15](demo/demo_15.png)
+
+### EKS Cluster
+![demo_16](demo/demo_16.png)
+
+### EC2 Nodes
+![demo_17](demo/demo_17.png)
+
+### GitHub Commits
+![demo_18](demo/demo_18.png)
+
+### Jenkins Blue Ocean Pipeline
+![demo_19](demo/demo_19.png)
+
+### ArgoCD Sync Status
+![demo_20](demo/demo_20.png)
