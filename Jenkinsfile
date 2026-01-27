@@ -41,6 +41,12 @@ spec:
         - sleep
       args:
         - 99d
+    - name: aws-cli
+      image: amazon/aws-cli:latest
+      command:
+        - sleep
+      args:
+        - 99d
 """
     }
   }
@@ -61,14 +67,11 @@ spec:
   stages {
     stage('Get AWS Account ID') {
       steps {
-        container('kaniko') {
+        container('aws-cli') {
           script {
             // Get AWS Account ID dynamically using IRSA credentials
             env.AWS_ACCOUNT_ID = sh(
-              script: '''
-                apk add --no-cache aws-cli > /dev/null 2>&1 || true
-                aws sts get-caller-identity --query Account --output text
-              ''',
+              script: 'aws sts get-caller-identity --query Account --output text',
               returnStdout: true
             ).trim()
             env.ECR_REGISTRY = "${env.AWS_ACCOUNT_ID}.dkr.ecr.${env.AWS_REGION}.amazonaws.com"
