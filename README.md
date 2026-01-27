@@ -113,3 +113,9 @@ terraform destroy
 
 ### GitHub Commits
 ![demo_18](demo/demo_18.png)
+
+### Jenkins Blue Ocean Pipeline
+![demo_19](demo/demo_19.png)
+
+### ArgoCD Sync Status
+![demo_20](demo/demo_20.png)
