@@ -112,7 +112,7 @@ module "rds" {
   source = "./modules/rds"
 
   name                          = "myapp-db"
-  use_aurora                    = false
+  use_aurora                    = true
   aurora_instance_count         = 2
 
   # --- Aurora-only ---
@@ -126,7 +126,7 @@ module "rds" {
   parameter_group_family_rds    = "postgres17"
 
   # Common
-  instance_class                = "db.t3.micro"
+  instance_class                = "db.t3.medium"
   allocated_storage             = 20
   db_name                       = "myapp"
   username                      = "postgres"
