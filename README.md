@@ -42,8 +42,8 @@ module "rds" {
   name                          = "myapp-db"
   use_aurora                    = true
   engine_cluster                = "aurora-postgresql"
-  engine_version_cluster        = "15.3"
-  parameter_group_family_aurora = "aurora-postgresql15"
+  engine_version_cluster        = "16.8"
+  parameter_group_family_aurora = "aurora-postgresql16"
   instance_class                = "db.t3.medium"
   db_name                       = "myapp"
   username                      = "postgres"
