@@ -117,7 +117,7 @@ module "rds" {
 
   # --- Aurora-only ---
   engine_cluster                = "aurora-postgresql"
-  engine_version_cluster        = "15.3"
+  engine_version_cluster        = "15.4"
   parameter_group_family_aurora = "aurora-postgresql15"
 
   # --- RDS-only ---
