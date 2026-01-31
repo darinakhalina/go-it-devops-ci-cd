@@ -58,7 +58,7 @@ spec:
 
     // Git repository settings (parameterized)
     GIT_REPO_URL = "github.com/darinakhalina/go-it-devops-ci-cd.git"
-    GIT_BRANCH   = "lesson-8-9"
+    GIT_BRANCH   = "lesson-db-module"
 
     COMMIT_EMAIL = "jenkins@localhost"
     COMMIT_NAME  = "jenkins"
