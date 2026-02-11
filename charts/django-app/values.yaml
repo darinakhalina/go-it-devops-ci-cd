@@ -28,7 +28,7 @@ resources:
     cpu: 250m
     memory: 256Mi
 
-# Environment variables for Django (from lesson-4)
+# Environment variables for Django
 config:
   POSTGRES_HOST: "db"
   POSTGRES_PORT: "5432"

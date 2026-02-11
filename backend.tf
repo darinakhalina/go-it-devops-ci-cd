@@ -3,10 +3,10 @@
 
 # terraform {
 #   backend "s3" {
-#     bucket         = "dasha-terraform-state-lesson-db"
-#     key            = "lesson-db/terraform.tfstate"
+#     bucket         = "dasha-terraform-state-final"
+#     key            = "final/terraform.tfstate"
 #     region         = "eu-west-1"
-#     dynamodb_table = "terraform-locks-lesson-db"
+#     dynamodb_table = "terraform-locks-final"
 #     encrypt        = true
 #   }
 # }

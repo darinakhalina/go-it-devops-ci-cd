@@ -23,8 +23,8 @@ provider "aws" {
 # S3 Backend Module (for Terraform state)
 module "s3_backend" {
   source      = "./modules/s3-backend"
-  bucket_name = "dasha-terraform-state-lesson-db"
-  table_name  = "terraform-locks-lesson-db"
+  bucket_name = "dasha-terraform-state-final"
+  table_name  = "terraform-locks-final"
 }
 
 # VPC Module
@@ -34,7 +34,7 @@ module "vpc" {
   public_subnets     = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
   private_subnets    = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
   availability_zones = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
-  vpc_name           = "lesson-db-vpc"
+  vpc_name           = "final-vpc"
 }
 
 # ECR Module
