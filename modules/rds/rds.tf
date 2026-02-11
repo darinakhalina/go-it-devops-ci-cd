@@ -12,8 +12,10 @@ resource "aws_db_instance" "standard" {
   db_subnet_group_name    = aws_db_subnet_group.default.name
   vpc_security_group_ids  = [aws_security_group.rds.id]
   multi_az                = var.multi_az
+  port                    = var.port
   publicly_accessible     = var.publicly_accessible
   backup_retention_period = var.backup_retention_period
+  storage_encrypted       = var.storage_encrypted
   parameter_group_name    = aws_db_parameter_group.standard[0].name
   skip_final_snapshot     = true
 

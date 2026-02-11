@@ -12,10 +12,10 @@ resource "aws_security_group" "rds" {
   vpc_id      = var.vpc_id
 
   ingress {
-    from_port   = 5432
-    to_port     = 5432
+    from_port   = var.port
+    to_port     = var.port
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = var.allowed_cidr_blocks
   }
 
   egress {

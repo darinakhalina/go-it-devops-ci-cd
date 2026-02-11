@@ -124,6 +124,24 @@ variable "engine_version_cluster" {
   default     = "15.3"
 }
 
+variable "storage_encrypted" {
+  description = "Увімкнути шифрування сховища"
+  type        = bool
+  default     = true
+}
+
+variable "allowed_cidr_blocks" {
+  description = "Список CIDR-блоків, яким дозволено доступ до БД"
+  type        = list(string)
+  default     = []
+}
+
+variable "port" {
+  description = "Порт бази даних (5432 для PostgreSQL, 3306 для MySQL)"
+  type        = number
+  default     = 5432
+}
+
 variable "parameter_group_family_rds" {
   description = "Родина параметрів для RDS (postgres15, mysql8.0, etc.)"
   type        = string

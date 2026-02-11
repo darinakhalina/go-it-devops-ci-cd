@@ -10,7 +10,9 @@ resource "aws_rds_cluster" "aurora" {
   db_subnet_group_name            = aws_db_subnet_group.default.name
   vpc_security_group_ids          = [aws_security_group.rds.id]
   backup_retention_period         = var.backup_retention_period
+  port                            = var.port
   skip_final_snapshot             = true
+  storage_encrypted               = var.storage_encrypted
   db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.aurora[0].name
 
   tags = var.tags

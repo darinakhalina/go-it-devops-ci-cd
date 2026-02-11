@@ -135,6 +135,9 @@ module "rds" {
   subnet_public_ids             = module.vpc.public_subnets
   publicly_accessible           = true
   vpc_id                        = module.vpc.vpc_id
+  # Доступ до БД тільки з VPC. Для локального підключення (pgAdmin, DBeaver)
+  # додайте свій IP: allowed_cidr_blocks = ["10.0.0.0/16", "YOUR_IP/32"]
+  allowed_cidr_blocks           = ["10.0.0.0/16"]
   multi_az                      = false
   backup_retention_period       = 7
   parameters = {
