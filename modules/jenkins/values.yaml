@@ -65,7 +65,7 @@ controller:
                           url('${github_repo_url}')
                           credentials('github-token')
                         }
-                        branches('*/lesson-8-9')
+                        branches('*/lesson-db-module')
                       }
                     }
                   }

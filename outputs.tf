@@ -78,3 +78,39 @@ output "argocd_admin_password" {
   description = "Command to get ArgoCD admin password"
   value       = module.argo_cd.admin_password
 }
+
+#-------------RDS-----------------
+output "rds_endpoint" {
+  description = "RDS database endpoint"
+  value       = module.rds.rds_endpoint
+}
+
+output "rds_address" {
+  description = "RDS database address"
+  value       = module.rds.rds_address
+}
+
+output "rds_port" {
+  description = "RDS database port"
+  value       = module.rds.rds_port
+}
+
+output "aurora_cluster_endpoint" {
+  description = "Aurora cluster endpoint (writer)"
+  value       = module.rds.aurora_cluster_endpoint
+}
+
+output "aurora_reader_endpoint" {
+  description = "Aurora cluster endpoint (reader)"
+  value       = module.rds.aurora_reader_endpoint
+}
+
+output "db_subnet_group_name" {
+  description = "DB Subnet Group name"
+  value       = module.rds.db_subnet_group_name
+}
+
+output "db_security_group_id" {
+  description = "Security Group ID for database"
+  value       = module.rds.security_group_id
+}
