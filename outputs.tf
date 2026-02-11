@@ -114,3 +114,19 @@ output "db_security_group_id" {
   description = "Security Group ID for database"
   value       = module.rds.security_group_id
 }
+
+#-------------Monitoring-----------------
+output "monitoring_namespace" {
+  description = "Monitoring namespace"
+  value       = module.monitoring.namespace
+}
+
+output "prometheus_service" {
+  description = "Prometheus server service name"
+  value       = module.monitoring.prometheus_service
+}
+
+output "grafana_service" {
+  description = "Grafana service name"
+  value       = module.monitoring.grafana_service
+}

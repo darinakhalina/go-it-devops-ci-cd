@@ -111,9 +111,9 @@ module "argo_cd" {
 module "rds" {
   source = "./modules/rds"
 
-  name                          = "myapp-db"
-  use_aurora                    = true
-  aurora_instance_count         = 2
+  name                  = "myapp-db"
+  use_aurora            = true
+  aurora_instance_count = 2
 
   # --- Aurora-only ---
   engine_cluster                = "aurora-postgresql"
@@ -121,25 +121,25 @@ module "rds" {
   parameter_group_family_aurora = "aurora-postgresql16"
 
   # --- RDS-only ---
-  engine                        = "postgres"
-  engine_version                = "17.2"
-  parameter_group_family_rds    = "postgres17"
+  engine                     = "postgres"
+  engine_version             = "17.2"
+  parameter_group_family_rds = "postgres17"
 
   # Common
-  instance_class                = "db.t3.medium"
-  allocated_storage             = 20
-  db_name                       = "myapp"
-  username                      = "postgres"
-  password                      = var.db_password
-  subnet_private_ids            = module.vpc.private_subnets
-  subnet_public_ids             = module.vpc.public_subnets
-  publicly_accessible           = true
-  vpc_id                        = module.vpc.vpc_id
+  instance_class      = "db.t3.medium"
+  allocated_storage   = 20
+  db_name             = "myapp"
+  username            = "postgres"
+  password            = var.db_password
+  subnet_private_ids  = module.vpc.private_subnets
+  subnet_public_ids   = module.vpc.public_subnets
+  publicly_accessible = true
+  vpc_id              = module.vpc.vpc_id
   # Доступ до БД тільки з VPC. Для локального підключення (pgAdmin, DBeaver)
   # додайте свій IP: allowed_cidr_blocks = ["10.0.0.0/16", "YOUR_IP/32"]
-  allowed_cidr_blocks           = ["10.0.0.0/16"]
-  multi_az                      = false
-  backup_retention_period       = 7
+  allowed_cidr_blocks     = ["10.0.0.0/16"]
+  multi_az                = false
+  backup_retention_period = 7
   parameters = {
     "max_connections" = "200"
   }
@@ -148,4 +148,12 @@ module "rds" {
     Environment = "dev"
     Project     = "myapp"
   }
+}
+
+# Monitoring Module (Prometheus + Grafana)
+module "monitoring" {
+  source    = "./modules/monitoring"
+  namespace = "monitoring"
+
+  depends_on = [module.eks]
 }

@@ -8,20 +8,20 @@ variable "github_username" {
   description = "GitHub username"
   type        = string
   sensitive   = true
-  default     = ""  # Will be set in terraform.tfvars for Jenkins/ArgoCD
+  default     = "" # Will be set in terraform.tfvars for Jenkins/ArgoCD
 }
 
 variable "github_token" {
   description = "GitHub Personal Access Token"
   type        = string
   sensitive   = true
-  default     = ""  # Will be set in terraform.tfvars for Jenkins/ArgoCD
+  default     = "" # Will be set in terraform.tfvars for Jenkins/ArgoCD
 }
 
 variable "github_repo_url" {
   description = "GitHub repository URL"
   type        = string
-  default     = ""  # Will be set in terraform.tfvars for Jenkins/ArgoCD
+  default     = "" # Will be set in terraform.tfvars for Jenkins/ArgoCD
 }
 
 variable "instance_type" {
