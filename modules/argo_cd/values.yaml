@@ -5,3 +5,6 @@ server:
     # instead of LoadBalancer for secure production deployments
     type: LoadBalancer
     port: 443
+
+dex:
+  enabled: false
